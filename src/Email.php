@@ -79,7 +79,7 @@ class Email
     protected $logs = array();
 
     /** @var string $charset */
-    protected $charset = 'utf-8';
+    protected $charset = 'UFT-8';
 
     /** @var array $headers */
     protected $headers = array();
@@ -338,7 +338,7 @@ class Email
         }
 
         $this->setHeader('Date', date('r'));
-        $this->setHeader('Subject', $this->subject);
+        $this->setHeader("Subject", "=?utf-8?B?" . base64_encode($this->subject) . "?="); // Fix Subject ??? in SMTP
         $this->setHeader('From', $this->formatAddress($this->from));
         $this->setHeader('Return-Path', $this->formatAddress($this->from));
         $this->setHeader('To', $this->formatAddressList($this->to));
